@@ -1,4 +1,4 @@
-import { ReactNode, createContext } from "react";
+import { ReactNode, createContext, useContext } from "react";
 import { useAppwrite } from "@/lib/useAppwrite";
 import { getCurrentUser } from "./appwrite";
 
@@ -23,12 +23,35 @@ export const GlobalProvider = ({children} : {children : ReactNode}) => {
         data : user,
         loading,
         refetch
-    } = useAppwrite({ getCurrentUser,
+    } = useAppwrite({ 
+        fn : getCurrentUser,
+
     });
 
+    const isLoggedIn = !!user;
+    
+    console.log(JSON.stringify(user, null ,2 ));
+
+
     return (
-        <GlobalContext.Provider value= {{}}>
+        <GlobalContext.Provider value= {{
+            isLoggedIn,
+            user,
+            loading,
+            refetch,
+        }}>
             {children}
         </GlobalContext.Provider>
     )
 }
+
+export const useGlobalContext = () : GlobalContextType => {
+    const context = useContext(GlobalContext);
+
+    if(!context){
+        throw new Error('useGlobalContext must be used within a GlobalProvider');
+    }
+    return context;
+}
+
+export default GlobalProvider;
