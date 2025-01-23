@@ -21,7 +21,7 @@ export const account = new Account(client);
 export async function login() {
     try {
         const redirectUri = Linking.createURL('/');
-        const response = await account.createOAuth2Token(OAuthProvider.Google, redirectUri, )       
+        const response = await account.createOAuth2Token(OAuthProvider.Google, redirectUri,)       
         
         if(!response) throw new Error("Failed to login");
 
@@ -68,7 +68,7 @@ export async function getCurrentUser() {
         if(response.$id){
             const userAvatar = avatar.getInitials(response.name)
             return {
-                ... response,
+                ...response,
                 avatar : userAvatar.toString(),
                 
             }
