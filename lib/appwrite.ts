@@ -4,8 +4,8 @@ import { openAuthSessionAsync } from "expo-web-browser";
 
 export const config = {
     platform : 'com.jsm.restate',
-    endpoint : 'process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT',
-    projectId : 'process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID',
+    endpoint : process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT,
+    projectId : process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID,
 }
 
 export const client = new Client();
@@ -13,7 +13,7 @@ export const client = new Client();
 client 
     .setEndpoint(config.endpoint!)
     .setProject(config.projectId!)
-    .setPlatform(config.platform)
+    .setPlatform(config.platform!)
 
 export const avatar = new Avatars(client);
 export const account = new Account(client);
@@ -27,7 +27,7 @@ export async function login() {
 
         const browserResult = await openAuthSessionAsync(
             response.toString(),
-            redirectUri
+            redirectUri,
         )
 
         if(browserResult.type !== 'success') throw new Error('Failed to Login!');
