@@ -1,6 +1,8 @@
 import { Image, SafeAreaView, Text, View } from "react-native";
 import { Link } from "expo-router";
 import images from "@/constants/images";
+import icons from "@/constants/icons";
+import Search from "@/app/components/Search";
 
 export default function Index() {
   return (
@@ -10,12 +12,15 @@ export default function Index() {
           <View className="flex flex-row items-center">
             <Image source={images.avatar} className="size-12 rounded-full"/>
             <View className="flex flex-col items-start ml-2 justify-center">
-              <Text >Good Morning</Text>
-              <Text>Mojo</Text>
+              <Text className="text-xs font-rubik text-black-100">Good Morning</Text>
+              <Text className="text-base font-rubik-medium text-black-300">Mojo</Text>
             </View>
           </View>
+          <Image source={icons.bell} className="size-6"/>
         </View>
+      
       </View>
+      <Search/>
     </SafeAreaView>
   )
 }
