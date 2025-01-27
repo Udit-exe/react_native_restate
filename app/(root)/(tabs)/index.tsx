@@ -1,4 +1,4 @@
-import { Image, SafeAreaView, Text, View } from "react-native";
+import { Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { Link } from "expo-router";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
@@ -21,6 +21,15 @@ export default function Index() {
       
       </View>
       <Search/>
+      <View className="my-5">
+        <View className="flex flex-row items-center justify-between ">
+          <Text>Featured</Text>
+          <TouchableOpacity>
+            <Text>See All</Text>
+          </TouchableOpacity>
+
+        </View>
+      </View>
     </SafeAreaView>
   )
 }
