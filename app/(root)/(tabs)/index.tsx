@@ -3,6 +3,7 @@ import { Link } from "expo-router";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 import Search from "@/app/components/Search";
+import { Card, FeaturedCard } from "@/app/components/Cards";
 
 export default function Index() {
   return (
@@ -29,8 +30,11 @@ export default function Index() {
           </TouchableOpacity>
 
         </View>
+        </View>
+        <FeaturedCard/>
+        <Card/>
       </View>
-      </View>
+      
     </SafeAreaView>
   )
 }
