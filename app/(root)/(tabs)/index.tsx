@@ -1,4 +1,4 @@
-import { FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { Button, FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { Link } from "expo-router";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
@@ -6,6 +6,7 @@ import Search from "@/app/components/Search";
 import { Card, FeaturedCard } from "@/app/components/Cards";
 import Filters from "@/app/components/Filters";
 import { useGlobalContext } from "@/lib/global-provider";
+import seed from "@/lib/seed";
 
 
 export default function Index() {
@@ -13,6 +14,7 @@ export default function Index() {
 
   return (
     <SafeAreaView className="bg-white h-full">
+    <Button title="Seed" onPress={seed} />
       <FlatList 
         data={[1,2,3,4]}
         renderItem={(item)=> <Card/>}
@@ -46,7 +48,7 @@ export default function Index() {
           </View>
 
           <FlatList 
-            data={[1,2,3]}
+            data={[5,6,7]}
             renderItem={({item}) => <FeaturedCard/>}
             keyExtractor={(item) => item.toString()}
             horizontal
