@@ -26,7 +26,7 @@ const propertyTypes = [
 ];
 
 const facilities = [
-  "Laundry",
+  "Laundary",
   "Parking",
   "Gym",
   "Wifi",
