@@ -86,3 +86,12 @@ export async function getCurrentUser() {
         return null;
     }
 }
+
+export async function getLatestProperties(){
+    try {
+        
+    } catch (error) {
+        console.error(error)
+        return []
+    }
+}

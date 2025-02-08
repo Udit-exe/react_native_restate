@@ -129,7 +129,7 @@ async function seed() {
         config.databaseId!,
         COLLECTIONS.GALLERY!,
         ID.unique(),
-        { image }
+        {image}
       );
       galleries.push(gallery);
     }
@@ -139,20 +139,21 @@ async function seed() {
     // Seed Properties
     for (let i = 1; i <= 20; i++) {
       const assignedAgent = agents[Math.floor(Math.random() * agents.length)];
-
       const assignedReviews = getRandomSubset(reviews, 5, 7); // 5 to 7 reviews
       const assignedGalleries = getRandomSubset(galleries, 3, 8); // 3 to 8 galleries
-
+      
       const selectedFacilities = facilities
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.floor(Math.random() * facilities.length) + 1);
-
+        
       const image =
         propertiesImages.length - 1 >= i
           ? propertiesImages[i]
           : propertiesImages[
               Math.floor(Math.random() * propertiesImages.length)
             ];
+
+
 
       const property = await databases.createDocument(
         config.databaseId!,
