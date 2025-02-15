@@ -1,5 +1,5 @@
 import { Button, FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import { Link } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 import Search from "@/app/components/Search";
@@ -7,15 +7,41 @@ import { Card, FeaturedCard } from "@/app/components/Cards";
 import Filters from "@/app/components/Filters";
 import { useGlobalContext } from "@/lib/global-provider";
 import seed from "@/lib/seed";
+import { useAppwrite } from "@/lib/useAppwrite";
+import { getLatestProperties, getProperties } from "@/lib/appwrite";
+import { useEffect } from "react";
 
 
 export default function Index() {
   const {user} = useGlobalContext();
+  const params =useLocalSearchParams<{query ?: string; filter ?: string;}>()
+
+  const { data: latestProperties, loading: latestPropertiesLoading} = useAppwrite({
+    fn: getLatestProperties
+  })
+
+  const {data: properties, loading, refetch } = useAppwrite({
+    fn: getProperties,
+    params: {
+      filter : params.filter!,
+      query : params.query!,
+      limit: 6,
+    },
+    skip: true, 
+  })
+
+  useEffect(()=>{
+    refetch({
+      filter: params.filter!,
+      query: params.query!,
+      limit: 6,
+    })
+  }, [params.filter, params.query])
 
   return (
     <SafeAreaView className="bg-white h-full">
       <FlatList 
-        data={[1,2,3,4]}
+        data={properties}
         renderItem={(item)=> <Card/>}
         keyExtractor={(item) => item.toString()}
         numColumns={2}
@@ -47,7 +73,7 @@ export default function Index() {
           </View>
 
           <FlatList 
-            data={[5,6,7]}
+            data={latestProperties}
             renderItem={({item}) => <FeaturedCard/>}
             keyExtractor={(item) => item.toString()}
             horizontal
