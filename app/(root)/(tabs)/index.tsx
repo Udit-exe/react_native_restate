@@ -1,5 +1,5 @@
 import { Button, FlatList, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import { Link, useLocalSearchParams } from "expo-router";
+import { Link, router, useLocalSearchParams } from "expo-router";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 import Search from "@/app/components/Search";
@@ -30,6 +30,8 @@ export default function Index() {
     skip: true, 
   })
 
+  const handleCardPress = (id : string) => router.push(`/properties/${id}`);
+
   useEffect(()=>{
     refetch({
       filter: params.filter!,
@@ -42,7 +44,7 @@ export default function Index() {
     <SafeAreaView className="bg-white h-full">
       <FlatList 
         data={properties}
-        renderItem={(item)=> <Card/>}
+        renderItem={(item)=> <Card item = {item} onPress={() => handleCardPress(item.$id)}/>}
         keyExtractor={(item) => item.toString()}
         numColumns={2}
         contentContainerClassName="pb-32 "
@@ -73,8 +75,8 @@ export default function Index() {
           </View>
 
           <FlatList 
-            data={latestProperties}
-            renderItem={({item}) => <FeaturedCard/>}
+            data={latestProperties  }
+            renderItem={({item}) => <FeaturedCard item = {item} onPress={() => handleCardPress(item.$id)}/>}
             keyExtractor={(item) => item.toString()}
             horizontal
             bounces={false}
