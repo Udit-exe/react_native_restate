@@ -1,11 +1,10 @@
-import { View, Text, ScrollView, Image, TouchableOpacity, ImageSourcePropType, Alert, Button } from 'react-native'
+import { View, Text, ScrollView, Image, TouchableOpacity, ImageSourcePropType, Alert} from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import icons from '@/constants/icons';
-import images from '@/constants/images';
 import { settings } from '@/constants/data';
 import { useGlobalContext } from '@/lib/global-provider';
-import { avatar, logout } from '@/lib/appwrite';
+import { logout } from '@/lib/appwrite';
 
 interface SettingsItemProps {
   icon: ImageSourcePropType;
